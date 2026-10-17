@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { connection } from 'next/server'
 
 interface Pokemon {
   name: string
@@ -13,6 +14,8 @@ interface Pokemon {
 }
 
 async function getPokemon(): Promise<Pokemon>  {
+  await connection(); 
+  
   const randomId = Math.floor(Math.random() * 150) + 1;
   const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${randomId}`);
   return response.data;
